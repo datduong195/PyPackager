@@ -111,10 +111,12 @@ class Ui_Dialog(object):
     def browserBase(self):
         data_path =QtWidgets.QFileDialog.getExistingDirectory(None, 'Open File', r"C:")
         self.inputBase.setText(data_path)
+        self.listFile.append("Input Base Directory: "+ data_path)
     #Method for browsing the Modded Directory
     def browserMod(self):
         data_path =QtWidgets.QFileDialog.getExistingDirectory(None, 'Open File', r"C:")
         self.inputMod.setText(data_path)
+        self.listFile.append("Input Mod Directory: "+ data_path)
     #Method for recursively walking through the directory for getting file names and absolute path
     def copyFile(self,name,dcmpRight):
 
@@ -124,7 +126,8 @@ class Ui_Dialog(object):
             fileToCopy = os.path.join(dcmpRight,name)
             if(not os.path.isdir(mkDir)):
                 os.makedirs(mkDir)
-            os.popen("copy " + fileToCopy + " " + mkDir)
+            #print("copy \"" + fileToCopy + "\"  \"" + mkDir + "\"")
+            os.popen("copy \"" + fileToCopy + "\" \"" + mkDir + "\"")
             self.listFile.append(fileToCopy)
             #Get absolute directory of boot.bin for detecting region
             if(name == "boot.bin"):
